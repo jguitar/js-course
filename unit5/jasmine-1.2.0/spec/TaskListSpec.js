@@ -1,61 +1,60 @@
 describe("TaskList", function() {
   it('adds a new task', function(){
-    add('a task');
-    expect(taskList.length).toEqual(1);
+    aTaskList.add('a task');
+    expect(aTaskList.taskList.length).toEqual(1);
   });
 
   it('removes a valid task', function(){
     // hack to empty all
-    remove('a task');
+    aTaskList.remove('a task');
 
-    add('a task1');
-    add('a task2');
-    add('a task3');
-    remove('a task2');
-    expect(taskList.length).toEqual(2);
+    aTaskList.add('a task1');
+    aTaskList.add('a task2');
+    aTaskList.add('a task3');
+    aTaskList.remove('a task2');
+    expect(aTaskList.taskList.length).toEqual(2);
   });
 
   it('do a valid task', function(){
     // hack to empty all
-    remove('a task1');
-    remove('a task3');
+    aTaskList.remove('a task1');
+    aTaskList.remove('a task3');
 
-    add('a task');
-    expect(taskList[0].isDone).toBeFalsy;
-    doTask('a task');
-    expect(taskList[0].isDone).toBeTruety;
+    aTaskList.add('a task');
+    expect(aTaskList.taskList[0].isDone).toBeFalsy;
+    aTaskList.doTask('a task');
+    expect(aTaskList.taskList[0].isDone).toBeTruety;
   });
 
   it('returns a done list', function(){
     // hack to empty all
-    remove('a task');
+    aTaskList.remove('a task');
 
-    add('a task');
-    expect(doneList().length).toEqual(0);
-    doTask('a task');
-    expect(doneList().length).toEqual(1);
+    aTaskList.add('a task');
+    expect(aTaskList.doneList().length).toEqual(0);
+    aTaskList.doTask('a task');
+    expect(aTaskList.doneList().length).toEqual(1);
   });
 
   it('returns a pending list', function(){
     // hack to empty all
-    remove('a task');
+    aTaskList.remove('a task');
 
-    add('a task');
-    expect(pendingList().length).toEqual(1);
-    doTask('a task');
-    expect(pendingList().length).toEqual(0);
+    aTaskList.add('a task');
+    expect(aTaskList.pendingList().length).toEqual(1);
+    aTaskList.doTask('a task');
+    expect(aTaskList.pendingList().length).toEqual(0);
   });
 
   it('returns all tasks', function(){
     // hack to empty all
-    remove('a task');
+    aTaskList.remove('a task');
 
-    add('a task1');
-    add('a task2');
-    add('a task3');
-    add('a task4');
-    expect(all().length).toEqual(4);
-
+    aTaskList.add('a task1');
+    aTaskList.add('a task2');
+    aTaskList.add('a task3');
+    aTaskList.add('a task4');
+    expect(aTaskList.all().length).toEqual(4);
   });
 
 });
