@@ -5,11 +5,21 @@ describe("TaskListClosures", function() {
   });
 
   it('removes a valid task', function(){
+    // hack to empty all
     remove('a task');
-    expect(taskList.length).toEqual(0);
+
+    add('a task1');
+    add('a task2');
+    add('a task3');
+    remove('a task2');
+    expect(taskList.length).toEqual(2);
   });
 
   it('do a valid task', function(){
+    // hack to empty all
+    remove('a task1');
+    remove('a task3');
+
     add('a task');
     expect(taskList[0].done).toEqual(false);
     doTask('a task');

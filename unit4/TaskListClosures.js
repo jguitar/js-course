@@ -1,7 +1,7 @@
 var taskList = [];
 
 var add = function(text){
-  task = {
+  var task = {
     text: text,
     done: false
   }
@@ -9,39 +9,40 @@ var add = function(text){
 }
 
 var remove = function(text){
-  for (var i = 0; i < taskList.length; i++){
-    if (taskList[i].text == text){
+  iterator(function(i, task){
+    if (task.text === text){
       taskList.splice(i, 1);
       return true;
     }
-  }
+  });
 }
 
 var doTask = function(text){
-  for (var i = 0; i < taskList.length; i++){
-    if (taskList[i].text == text){
-      taskList[i].done = true;
+  iterator(function(i, task){
+    if (task.text === text){
+      task.done = true;
+      return true;
     }
-  }
+  });
 }
 
 var doneList = function(){
   result = [];
-  for (var i = 0; i < taskList.length; i++){
-    if (taskList[i].done) {
-      result.push(taskList[i]);
+  iterator(function(i, task){
+    if (task.done) {
+      result.push(task);
     }
-  }
+  })
   return result;
 }
 
 var pendingList = function(){
   result = [];
-  for (var i = 0; i < taskList.length; i++){
-    if (!taskList[i].done) {
-      result.push(taskList[i]);
+  iterator(function(i, task){
+    if (!task.done) {
+      result.push(task);
     }
-  }
+  });
   return result;
 }
 
@@ -50,7 +51,13 @@ var all = function(){
 }
 
 var toConsole = function(){
+  iterator(function(i, task){
+    console.log('Task #', i + 1 + ':', task.text, '. Done:', task.done);
+  });
+}
+
+var iterator = function(operation){
   for (var i = 0; i < taskList.length; i++){
-    console.log('Task #', i + 1 + ':', taskList[i].text, '. Done:', taskList[i].done);
+    operation(i, taskList[i]);
   }
 }
