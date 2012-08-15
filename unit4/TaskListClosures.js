@@ -9,41 +9,41 @@ var add = function(text){
 }
 
 var remove = function(text){
-  iterator(function(i, task){
+  selected = -1;
+  iterator(function(task, index){
     if (task.text === text){
-      taskList.splice(i, 1);
-      return true;
+      selected = index;
     }
   });
+  taskList.splice(selected, 1);
 }
 
 var doTask = function(text){
-  iterator(function(i, task){
+  iterator(function(task){
     if (task.text === text){
       task.done = true;
-      return true;
     }
   });
 }
 
 var doneList = function(){
-  result = [];
-  iterator(function(i, task){
+  doneTasks = [];
+  iterator(function(task){
     if (task.done) {
-      result.push(task);
+      doneTasks.push(task);
     }
   })
-  return result;
+  return doneTasks;
 }
 
 var pendingList = function(){
-  result = [];
-  iterator(function(i, task){
+  pendingTasks = [];
+  iterator(function(task){
     if (!task.done) {
-      result.push(task);
+      pendingTasks.push(task);
     }
   });
-  return result;
+  return pendingTasks;
 }
 
 var all = function(){
@@ -51,13 +51,13 @@ var all = function(){
 }
 
 var toConsole = function(){
-  iterator(function(i, task){
-    console.log('Task #', i + 1 + ':', task.text, '. Done:', task.done);
+  iterator(function(task, index){
+    console.log('Task #', index + 1 + ':', task.text, '. Done:', task.done);
   });
 }
 
 var iterator = function(operation){
   for (var i = 0; i < taskList.length; i++){
-    operation(i, taskList[i]);
+    operation(taskList[i], i);
   }
 }
