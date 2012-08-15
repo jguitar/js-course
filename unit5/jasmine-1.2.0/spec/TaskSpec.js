@@ -1,7 +1,7 @@
 describe("Task", function() {
   it('creates a new task', function(){
     var task = new Task('a task');
-    expect(task.text).toBeUndefined();
+    expect(task.text).toBeDefined();
   });
 
   it('formats to string', function(){

@@ -1,9 +1,9 @@
 var Task = function(taskText){
-  var done = false;
-  var text = taskText;
+  this.done = false;
+  this.text = taskText;
 
   this.toString = function(){
-    return 'Task: ' + text + '. Done: ' + done;
+    return 'Task: ' + this.text + '. Done: ' + this.done;
   }
 
   this.do = function(){
