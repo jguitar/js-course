@@ -10,7 +10,7 @@ function addIcon() {
 
 function removeBlogArchive(){
   var archive = document.getElementById('archive');
-
+  archive.parentNode.removeChild(archive); // archive.innerHTML = '';
 }
 
 function addBlogRoll() {
