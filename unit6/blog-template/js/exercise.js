@@ -14,6 +14,26 @@ function removeBlogArchive(){
 }
 
 function addBlogRoll() {
-
   var widget = document.createElement('div');
+  widget.className = 'widget';
+
+  var h2 = document.createElement('h2');
+  h2.innerHTML = 'Blog roll';
+
+  var content = document.createElement('div');
+  content.className = 'contentarea';
+
+  var list = document.createElement('ul');
+  for (var i = 0; i < 3; i++){
+    var li = document.createElement('li');
+    li.innerHTML = 'mi texto' + (i + 1);
+    list.appendChild(li);
+  }
+  content.appendChild(list);
+
+  widget.appendChild(h2);
+  widget.appendChild(content);
+
+  var sidebar = document.getElementById('sidebar');
+  sidebar.appendChild(widget);
 }
