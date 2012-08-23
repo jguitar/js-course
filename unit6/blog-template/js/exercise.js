@@ -20,14 +20,15 @@ function addBlogRoll() {
 }
 
 function createWidget(title, elements){
-  var widget = document.createElement('div');
-  widget.className = 'widget';
+  var widget_div = document.createElement('div');
+  widget_div.className = 'widget';
 
   var h2 = createH2(title);
-  widget.appendChild(h2);
   var content = createContent(elements);
-  widget.appendChild(content);
-  return widget;
+
+  widget_div.appendChild(h2);
+  widget_div.appendChild(content);
+  return widget_div;
 }
 
 function createH2(title){
@@ -37,18 +38,27 @@ function createH2(title){
 }
 
 function createContent(elements){
-  var content = document.createElement('div');
-  content.className = 'contentarea';
+  var content_div = document.createElement('div');
+  content_div.className = 'contentarea';
+  var list = createListElements(elements);
+  content_div.appendChild(list);
+  return content_div;
+}
 
+function createListElements(elements){
   var list = document.createElement('ul');
   for (var i = 0; i < elements.length; i++){
-    var link = document.createElement('a');
-    link.href = '#';
-    link.innerHTML = elements[i];
-    var li = document.createElement('li');
-    li.appendChild(link);
-    list.appendChild(li);
+    var item = createItem(elements[i]);
+    list.appendChild(item);
   }
-  content.appendChild(list);
-  return content;
+  return list;
+}
+
+function createItem(element){
+  var link = document.createElement('a');
+  link.href = '#';
+  link.innerHTML = element;
+  var item = document.createElement('li');
+  item.appendChild(link);
+  return item;
 }
